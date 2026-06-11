@@ -46,15 +46,3 @@ Prices in the workbook are USD list prices captured 11 June 2026; they drift. To
 | 5. PAYG vs RI, IaaS vs PaaS | Scenarios 1 and 4 in OPTIMIZATION_ANALYSIS.md |
 | 6. Azure Hybrid Benefit | Scenario 3 |
 | 7. Report and export | `estimate/azure-cost-estimate-west-europe.xlsx` |
-
-## Publishing this repo
-
-```bash
-cd azure-pricing-models
-git init
-git add .
-git commit -m "Azure pricing models: cost estimate and optimization analysis"
-git branch -M main
-git remote add origin https://github.com/<your-username>/azure-pricing-models.git
-git push -u origin main
-```
