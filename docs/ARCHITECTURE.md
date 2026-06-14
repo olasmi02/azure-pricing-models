@@ -35,6 +35,15 @@ Two web servers sit behind a Standard Load Balancer in an availability set, whic
 
 **Networking.** A Standard Load Balancer (five rules included in the base rate) fronts the web tier. Outbound traffic to the internet is the assignment's stated 1 TB/month, of which Azure gives the first 100 GB free.
 
+### Compute Option: Azure Spot VMs
+Azure Spot Virtual Machines allow organizations to purchase unused Azure compute capacity at significant discounts (often up to 90% off standard Pay-As-You-Go rates).
+*   **The Evictability Rationale**: Spot VMs carry no SLA. If Microsoft requires the compute capacity back for a standard paying customer, the Spot VM will be evicted and shut down with a brief 30-second warning.
+*   **Application Suitability**:
+    - **Unsuitable Workloads**: Spot VMs are **completely unsuitable** for the primary web servers or database layers in our three-tier application. Because these servers handle user traffic and maintain active SQL sessions, sudden evictions would cause immediate application outages for users.
+    - **Suitable Workloads**: Spot VMs are best used for non-critical, interruptible, or batch-processing parts of the architecture. For example, if the application has a background queue for image processing, scheduled data transformation (ETL) tasks, or nightly report generation, these nodes can run as Spot VMs. If evicted, the workload simply pauses until a new Spot node is provisioned, without impacting customer-facing web traffic.
+
+---
+
 ## Usage assumptions
 
 | Parameter | Value | Rationale |
